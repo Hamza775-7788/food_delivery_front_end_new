@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class AppStyles {
   static TextStyle normalStyleTitle({Color? color}) {
-    return TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w600);
+    return TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.w400);
   }
 
   static TextStyle bigTitle({Color? color}) {

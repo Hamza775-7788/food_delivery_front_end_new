@@ -6,6 +6,7 @@ import 'package:food_delivery_front_end/core/constant/helper.dart';
 import 'package:food_delivery_front_end/core/erorrs/excsptions.dart';
 import 'package:food_delivery_front_end/core/erorrs/failures.dart';
 import 'package:food_delivery_front_end/core/local_dara_source/local_data_source.dart';
+import 'package:food_delivery_front_end/core/model/userModel.dart';
 import 'package:food_delivery_front_end/core/network/network.dart';
 import 'package:food_delivery_front_end/main.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,7 @@ abstract class AuthRepository {
     required String email,
     required String passowrd,
   });
-  Future<Either<Failure, Unit>> getUserData();
+  Future<Either<Failure, UserModel>> getUserData();
 }
 
 class AuthRepositoryImpl extends AuthRepository {
@@ -197,7 +198,7 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> getUserData() async {
+  Future<Either<Failure, UserModel>> getUserData() async {
     try {
       final String token = await _localDataSource.getToken();
       var headers = headersList;
@@ -206,7 +207,12 @@ class AuthRepositoryImpl extends AuthRepository {
           .get("$rootApi/user", headers: headers)
           .timeout(Duration(seconds: 20));
       if (response.statusCode == 200) {
-        return Right(unit);
+        print("==================");
+        print(response.body);
+        print("==================");
+        final UserModel user = UserModel.fromJson(response.body);
+        await _localDataSource.cashedUser(user);
+        return Right(user);
       } else if (response.statusCode == 401) {
         return Left(UnauthenticatedFailure());
       } else {

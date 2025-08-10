@@ -69,7 +69,7 @@ class _MainviewpageState extends State<Mainviewpage> {
               children: [
                 // Image.asset(AppIcons.cart),
                 Icon(
-                  Icons.store,
+                  Icons.shop_2,
                   size: 25,
                   color: Get.theme.colorScheme.primary,
                 ),
@@ -79,7 +79,7 @@ class _MainviewpageState extends State<Mainviewpage> {
                 ),
               ],
             ),
-            icon: Icon(Icons.favorite, color: Get.theme.colorScheme.secondary),
+            icon: Icon(Icons.shop, color: Get.theme.colorScheme.secondary),
             label: "",
           ),
           NavigationDestination(

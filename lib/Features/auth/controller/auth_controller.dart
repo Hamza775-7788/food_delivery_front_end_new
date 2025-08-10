@@ -3,6 +3,7 @@ import 'package:food_delivery_front_end/Features/auth/view/sign_in_view.dart';
 import 'package:food_delivery_front_end/Features/auth/repository/auth_repository.dart';
 import 'package:food_delivery_front_end/Features/auth/view/emial_verifiyCodeViewPage.dart';
 import 'package:food_delivery_front_end/core/erorrs/handle_message.dart';
+import 'package:food_delivery_front_end/core/model/userModel.dart';
 import 'package:food_delivery_front_end/core/shared/dialogs.dart';
 import 'package:get/get.dart';
 
@@ -16,13 +17,14 @@ abstract class AuthController extends GetxController {
   Future<void> forgotePassowrd({required String email});
   Future<void> verifiyCode({required String email, required String code});
   Future<void> restPassowrd({required String email, required String passowrd});
-  Future<void> getData();
+  Future<void> getUserData();
   Future<void> splashScreen();
 }
 
 class AuthControllerImpl extends AuthController {
   AuthRepositoryImpl _authRepositoryImpl = AuthRepositoryImpl();
 
+  UserModel? user;
   @override
   Future<void> forgotePassowrd({required String email}) async {
     try {
@@ -149,9 +151,12 @@ class AuthControllerImpl extends AuthController {
   }
 
   @override
-  Future<void> getData() async {
+  Future<void> getUserData() async {
     final requset = await _authRepositoryImpl.getUserData();
-    requset.fold((failure) {}, (e) {});
+    requset.fold((failure) {}, (e) {
+      user = e;
+      update();
+    });
   }
 
   @override

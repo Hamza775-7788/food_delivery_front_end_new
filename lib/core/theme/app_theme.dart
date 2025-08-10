@@ -5,7 +5,12 @@ const Color scColor = Color(0xff878787);
 
 ThemeData ligthTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: Colors.white,
-  appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+  appBarTheme: AppBarTheme(
+    scrolledUnderElevation: 0,
+    elevation: 0,
+
+    backgroundColor: Colors.white,
+  ),
   colorScheme: ColorScheme.light(
     surface: Colors.white,
 
