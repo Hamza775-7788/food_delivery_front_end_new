@@ -47,25 +47,29 @@ class _MainviewpageState extends State<Mainviewpage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
-                  Icons.chat,
+                  Icons.favorite,
                   size: 25,
                   color: Get.theme.colorScheme.primary,
                 ),
                 Text(
-                  viewModle.chatlable,
+                  viewModle.favorteLable,
                   style: TextStyle(color: Get.theme.colorScheme.primary),
                 ),
               ],
             ),
-            icon: Icon(Icons.chat, color: Get.theme.colorScheme.secondary),
+            icon: Icon(
+              Icons.favorite_border,
+              color: Get.theme.colorScheme.secondary,
+            ),
             label: "",
           ),
           NavigationDestination(
             selectedIcon: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                // Image.asset(AppIcons.cart),
                 Icon(
-                  Icons.favorite,
+                  Icons.store,
                   size: 25,
                   color: Get.theme.colorScheme.primary,
                 ),

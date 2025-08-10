@@ -10,6 +10,7 @@ import 'package:food_delivery_front_end/core/constant/image.dart';
 import 'package:food_delivery_front_end/core/shared/my_button.dart';
 
 import 'package:food_delivery_front_end/core/theme/text_styles.dart';
+import 'package:food_delivery_front_end/main.dart';
 
 import 'package:get/get.dart';
 
@@ -144,7 +145,12 @@ class _HomeViewState extends State<HomeView> {
                 itemCount: viewmodel.products.length,
                 itemBuilder: (context, index) {
                   final product = viewmodel.products[index];
-                  return ProductHomeWidget(onTap: () {}, product: product);
+                  return ProductHomeWidget(
+                    onTap: () {
+                      favoriteControllerImpl.addToFavorite(product);
+                    },
+                    product: product,
+                  );
                 },
               ),
             ],
@@ -154,4 +160,3 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-

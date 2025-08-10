@@ -60,7 +60,7 @@ class _SignInViewState extends State<SignInView> {
 
               SliverToBoxAdapter(
                 child: MyTextFieldWithLable(
-                  // isPassowrd: true,
+                  isPassowrd: true,
                   controller: viewmodel.passwordController,
                   hint: viewmodel.passwordHint,
                   lable: viewmodel.passwordLable,

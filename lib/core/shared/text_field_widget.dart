@@ -6,9 +6,9 @@ class MyTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hint;
   final bool isPassowrd;
-  final int? maxLine;
+  final int maxLine;
   const MyTextField({
-    this.maxLine,
+    this.maxLine = 1,
     this.isPassowrd = false,
     required this.controller,
     required this.hint,
@@ -24,7 +24,7 @@ class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      maxLines: widget.isPassowrd ? null : widget.maxLine,
+      // maxLines: widget.maxLine,
       minLines: 1,
       obscureText: widget.isPassowrd ? showPassword : false,
       controller: widget.controller,
@@ -67,9 +67,9 @@ class MyTextFieldWithLable extends StatefulWidget {
   final String hint;
   final String lable;
   final bool isPassowrd;
-  final int? maxLine;
+  final int maxLine;
   const MyTextFieldWithLable({
-    this.maxLine,
+    this.maxLine = 1,
     super.key,
     this.isPassowrd = false,
     required this.controller,

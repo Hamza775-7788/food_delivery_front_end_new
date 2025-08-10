@@ -5,6 +5,7 @@ const String _icon = "$_asset/Icons";
 class AppImage {
   static String onBordingImage = "$_image/onBordingView.png";
   static String homeImage = "$_image/home_image.png";
+  static String noData = "$_image/empty.png";
 }
 
 class AppIcons {
@@ -14,4 +15,5 @@ class AppIcons {
   static String erorrIcon = "$_icon/erorr_icon.png";
   static String successIcon = "$_icon/success_icon.png";
   static String worningIcon = "$_icon/woring_icon.png";
+  static String cart = "$_icon/cart.png";
 }
