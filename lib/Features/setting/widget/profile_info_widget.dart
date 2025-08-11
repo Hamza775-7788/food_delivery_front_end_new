@@ -16,7 +16,7 @@ class ProfileInfoWidget extends StatelessWidget {
             MyProfileImage(),
             SizedBox(height: 16),
             Text(
-              controller.user?.name ?? "",
+              controller.user?.profile?.fullName ?? controller.user?.name ?? "",
               style: AppStyles.normalStyleTitleBold(),
             ),
             Text(

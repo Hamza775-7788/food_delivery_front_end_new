@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:food_delivery_front_end/core/Server/root_link.dart';
@@ -8,6 +9,7 @@ import 'package:food_delivery_front_end/core/erorrs/failures.dart';
 import 'package:food_delivery_front_end/core/local_dara_source/local_data_source.dart';
 import 'package:food_delivery_front_end/core/model/userModel.dart';
 import 'package:food_delivery_front_end/core/network/network.dart';
+import 'package:food_delivery_front_end/core/upload_packge/upload_File.dart';
 import 'package:food_delivery_front_end/main.dart';
 import 'package:get/get.dart';
 
@@ -31,11 +33,20 @@ abstract class AuthRepository {
     required String passowrd,
   });
   Future<Either<Failure, UserModel>> getUserData();
+  Future<Either<Failure, Unit>> setProfile({
+    required Profile profile,
+    File? image,
+  });
+  Future<Either<Failure, Unit>> updateProfile({
+    required Profile profile,
+    File? image,
+  });
 }
 
 class AuthRepositoryImpl extends AuthRepository {
   final GetConnect _getConnect = GetConnect();
   final NetworkInfo _networkInfo = NetworkInfo();
+  final UploaidFilesImpl _uploaidFilesImpl = UploaidFilesImpl();
   final LocalDataSource _localDataSource = LocalDataSource(
     sharedPreferences: sharedPreferences,
   );
@@ -203,6 +214,8 @@ class AuthRepositoryImpl extends AuthRepository {
       final String token = await _localDataSource.getToken();
       var headers = headersList;
       headers['Authorization'] = 'Bearer $token';
+
+      print("token : $token");
       final response = await _getConnect
           .get("$rootApi/user", headers: headers)
           .timeout(Duration(seconds: 20));
@@ -220,6 +233,83 @@ class AuthRepositoryImpl extends AuthRepository {
       }
     } on EmptyCashdDataSourceExceptions {
       return Left(EmptyCashdDataSourceFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> setProfile({
+    required Profile profile,
+    File? image,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final token = await _localDataSource.getToken();
+        var headers = headersList;
+        headers['Authorization'] = 'Bearer $token';
+
+        if (image != null) {
+          String imageUrl = await _uploaidFilesImpl.uploadFile(
+            file: image,
+            foleder: "profiles",
+            url: "$rootApi/file",
+          );
+          profile.image = imageUrl;
+        }
+        final body = profile.toJson();
+        final response = await _getConnect.post(
+          "$rootApi/profile",
+          jsonEncode(body),
+          headers: headers,
+        );
+
+        if (response.statusCode == 201) {
+          return Right(unit);
+        } else {
+          return Left(ServerFailure());
+        }
+      } on EmptyCashdDataSourceExceptions {
+        return Left(EmptyCashdDataSourceFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateProfile({
+    required Profile profile,
+    File? image,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final token = await _localDataSource.getToken();
+        var headers = headersList;
+        headers['Authorization'] = 'Bearer $token';
+
+        if (image != null) {
+          String imageUrl = await _uploaidFilesImpl.uploadFile(
+            file: image,
+            foleder: "profiles",
+            url: "$rootApi/file",
+          );
+          profile.image = imageUrl;
+        }
+        final body = profile.toJson();
+        final response = await _getConnect.put(
+          "$rootApi/profile",
+          jsonEncode(body),
+          headers: headers,
+        );
+        if (response.statusCode == 200) {
+          return Right(unit);
+        } else {
+          return Left(ServerFailure());
+        }
+      } on EmptyCashdDataSourceExceptions {
+        return Left(EmptyCashdDataSourceFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
     }
   }
 }

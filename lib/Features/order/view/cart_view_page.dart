@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_front_end/Features/order/controller/cart_controller.dart';
 import 'package:food_delivery_front_end/Features/order/viewModel/cart_viewModel.dart';
-import 'package:food_delivery_front_end/core/constant/image.dart';
 import 'package:food_delivery_front_end/core/theme/text_styles.dart';
 import 'package:get/state_manager.dart';
 

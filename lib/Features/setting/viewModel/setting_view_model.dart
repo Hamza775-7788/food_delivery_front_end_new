@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_front_end/Features/auth/controller/auth_controller.dart';
+import 'package:food_delivery_front_end/Features/setting/view/persnal_data_view.dart';
 import 'package:get/get.dart';
 
 class SettingViewModel {
@@ -16,7 +17,9 @@ class SettingViewModel {
       SettingModel(
         icon: Icon(Icons.person),
         name: "Personal Data",
-        onTap: () {},
+        onTap: () {
+          Get.to(() => PersnalDataView());
+        },
       ),
       SettingModel(icon: Icon(Icons.payment), name: "My Orders", onTap: () {}),
       SettingModel(
