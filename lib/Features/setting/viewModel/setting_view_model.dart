@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_front_end/Features/address/view/address_view_page.dart';
 import 'package:food_delivery_front_end/Features/auth/controller/auth_controller.dart';
 import 'package:food_delivery_front_end/Features/setting/view/persnal_data_view.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,13 @@ class SettingViewModel {
           Get.to(() => PersnalDataView());
         },
       ),
-      SettingModel(icon: Icon(Icons.payment), name: "My Orders", onTap: () {}),
+      SettingModel(
+        icon: Icon(Icons.location_on_outlined),
+        name: "My Address",
+        onTap: () {
+          Get.to(() => AddressViewPage());
+        },
+      ),
       SettingModel(
         icon: Icon(Icons.notifications_outlined),
         name: "Notifications",
