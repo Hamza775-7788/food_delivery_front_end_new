@@ -8,4 +8,5 @@ class MessageErorrString {
   static String nameExists = "This name is already taken";
   static String invalidAccount = "Invalid account information";
   static String invalidCode = "Verification code is invalid or expired";
+  static String statusChangeNotAllowed = "Status change not allowed";
 }

@@ -41,6 +41,8 @@ String _failureToString(Failure failure) {
       return MessageErorrString.emailExists;
     case OprtingFailure():
       return MessageErorrString.oprting;
+    case StatusChangeNotAllowedFailure():
+      return MessageErorrString.statusChangeNotAllowed;
 
     default:
       return "Erorrr";

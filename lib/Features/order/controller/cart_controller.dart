@@ -14,7 +14,8 @@ abstract class CartController extends GetxController {
 
 class CartControllerImpl extends CartController {
   OrderModle? cart;
-
+  List<OrderModle> pendingOrders = [];
+  List<OrderModle> orders = [];
   @override
   addToCart({required ProductModel product, required int quntity}) async {
     if (cart == null) {

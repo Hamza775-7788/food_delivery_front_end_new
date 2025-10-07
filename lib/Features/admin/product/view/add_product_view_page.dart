@@ -31,7 +31,6 @@ class _AddProductViewPageState extends State<AddProductViewPage> {
   @override
   Widget build(BuildContext context) {
     viewModel.categories;
-    print(viewModel.categories.length);
     return Scaffold(
       appBar: AppBar(title: Text(viewModel.title)),
       body: Padding(
