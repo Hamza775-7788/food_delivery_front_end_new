@@ -1,6 +1,7 @@
 import 'package:food_delivery_front_end/core/erorrs/handle_message.dart';
 import 'package:food_delivery_front_end/core/model/order_modle.dart';
 import 'package:food_delivery_front_end/core/model/product_model.dart';
+import 'package:food_delivery_front_end/main.dart';
 import 'package:get/get.dart';
 
 abstract class CartController extends GetxController {
@@ -21,10 +22,10 @@ class CartControllerImpl extends CartController {
     if (cart == null) {
       cart = OrderModle(
         id: 0,
-        createdAt: DateTime.now().toString(),
-        updatedAt: DateTime.now().toString(),
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
         userId: 0,
-        address: 'address',
+        address: addressControllerImpl.address.first.address,
         orderStatusID: 1,
         orderDetails: [
           OrderDetails(
@@ -61,6 +62,11 @@ class CartControllerImpl extends CartController {
 
   @override
   cancelCart() async {
+    cart = null;
+    update();
+  }
+
+  clearOrder() {
     cart = null;
     update();
   }

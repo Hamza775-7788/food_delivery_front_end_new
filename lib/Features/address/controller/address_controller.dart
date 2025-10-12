@@ -18,6 +18,12 @@ class AddressControllerImpl extends AddressController {
   List<AddressModel> address = [ ] ;
 
   @override
+  void onInit() {
+    getAddress();
+    super.onInit();
+  }
+
+  @override
   Future<void> activeAddress({required int id}) async {
     lodingDialog();
     final request = await repository.activeAddress(id: id);

@@ -16,5 +16,6 @@ ThemeData ligthTheme = ThemeData.light().copyWith(
 
     primary: priamryColor,
     secondary: scColor,
+    inversePrimary: Color(0xffF1F3F6),
   ),
 );

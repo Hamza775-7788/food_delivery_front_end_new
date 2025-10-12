@@ -42,8 +42,8 @@ class ProductModel {
       deliveryPrice: json['delivery_price']?.toDouble() ?? 0.0,
       makeTime: json['make_time'],
       averageRating: json['average_rating']?.toDouble() ?? 0.0,
-      category: json['category'],
-      categoryImage: json['category_image'],
+      category: json['category'] ?? "",
+      categoryImage: json['category_image'] ?? "",
     );
   }
 

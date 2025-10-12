@@ -37,7 +37,11 @@ class OrderRepositoryImpl implements OrderRepository {
       final String token = await localDataSource.getToken();
       var headers = headersList;
       headers['Authorization'] = 'Bearer $token';
-      final response = await getConnect.post("$rootApi/orders/$id/accept", {});
+      final response = await getConnect.post(
+        "$rootApi/orders/$id/accept",
+        {},
+        headers: headers,
+      );
       if (response.statusCode == 200) {
         return Right(unit);
       } else if (response.statusCode == 400) {
@@ -60,6 +64,7 @@ class OrderRepositoryImpl implements OrderRepository {
       final response = await getConnect.post(
         "$rootApi/order",
         jsonEncode(body),
+        headers: headers,
       );
       if (response.statusCode == 200) {
         return Right(unit);
@@ -79,7 +84,11 @@ class OrderRepositoryImpl implements OrderRepository {
       final String token = await localDataSource.getToken();
       var headers = headersList;
       headers['Authorization'] = 'Bearer $token';
-      final response = await getConnect.post("$rootApi/orders/$id/delete", {});
+      final response = await getConnect.post(
+        "$rootApi/orders/$id/delete",
+        {},
+        headers: headers,
+      );
       if (response.statusCode == 200) {
         return Right(unit);
       } else if (response.statusCode == 400) {
@@ -98,7 +107,11 @@ class OrderRepositoryImpl implements OrderRepository {
       final String token = await localDataSource.getToken();
       var headers = headersList;
       headers['Authorization'] = 'Bearer $token';
-      final response = await getConnect.post("$rootApi/orders/$id/deliver", {});
+      final response = await getConnect.post(
+        "$rootApi/orders/$id/deliver",
+        {},
+        headers: headers,
+      );
       if (response.statusCode == 200) {
         return Right(unit);
       } else if (response.statusCode == 400) {
@@ -117,7 +130,11 @@ class OrderRepositoryImpl implements OrderRepository {
       final String token = await localDataSource.getToken();
       var headers = headersList;
       headers['Authorization'] = 'Bearer $token';
-      final response = await getConnect.post("$rootApi/orders/$id/reject", {});
+      final response = await getConnect.post(
+        "$rootApi/orders/$id/reject",
+        {},
+        headers: headers,
+      );
       if (response.statusCode == 200) {
         return Right(unit);
       } else if (response.statusCode == 400) {
@@ -136,7 +153,11 @@ class OrderRepositoryImpl implements OrderRepository {
       final String token = await localDataSource.getToken();
       var headers = headersList;
       headers['Authorization'] = 'Bearer $token';
-      final response = await getConnect.post("$rootApi/orders/$id/return", {});
+      final response = await getConnect.post(
+        "$rootApi/orders/$id/return",
+        {},
+        headers: headers,
+      );
       if (response.statusCode == 200) {
         return Right(unit);
       } else if (response.statusCode == 400) {
@@ -155,7 +176,11 @@ class OrderRepositoryImpl implements OrderRepository {
       final String token = await localDataSource.getToken();
       var headers = headersList;
       headers['Authorization'] = 'Bearer $token';
-      final response = await getConnect.post("$rootApi/orders/$id/ship", {});
+      final response = await getConnect.post(
+        "$rootApi/orders/$id/ship",
+        {},
+        headers: headers,
+      );
       if (response.statusCode == 200) {
         return Right(unit);
       } else if (response.statusCode == 400) {
@@ -174,7 +199,13 @@ class OrderRepositoryImpl implements OrderRepository {
       final String token = await localDataSource.getToken();
       var headers = headersList;
       headers['Authorization'] = 'Bearer $token';
-      final response = await getConnect.get("$rootApi/order/user");
+      final response = await getConnect.get(
+        "$rootApi/order/user",
+        headers: headers,
+      );
+      print("$rootApi/order/user");
+      print(token);
+
       if (response.statusCode == 200) {
         final jsonData = response.body;
 
@@ -201,7 +232,10 @@ class OrderRepositoryImpl implements OrderRepository {
       final String token = await localDataSource.getToken();
       var headers = headersList;
       headers['Authorization'] = 'Bearer $token';
-      final response = await getConnect.get("$rootApi/order/user/$statusID");
+      final response = await getConnect.get(
+        "$rootApi/order/user/$statusID",
+        headers: headers,
+      );
       if (response.statusCode == 200) {
         final jsonData = response.body;
 
@@ -230,6 +264,7 @@ class OrderRepositoryImpl implements OrderRepository {
       final response = await getConnect.put(
         "$rootApi/order/${order.id}",
         jsonEncode(body),
+        headers: headers,
       );
       if (response.statusCode == 200) {
         return Right(unit);

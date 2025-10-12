@@ -1,16 +1,16 @@
 import 'package:food_delivery_front_end/core/model/product_model.dart';
 
 class OrderModle {
-   int id;
-   String createdAt;
-   String updatedAt;
-   int userId;
-   String address;
+  int id;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int userId;
+  String address;
 
-   int orderStatusID;
-   List<OrderDetails> orderDetails;
-   String userNAme;
-   String userEmail;
+  int orderStatusID;
+  List<OrderDetails> orderDetails;
+  String userNAme;
+  String userEmail;
   double get totle {
     double _totle = 0;
 
@@ -47,8 +47,8 @@ class OrderModle {
     final detatils = json['order_detils'] as List;
     return OrderModle(
       id: json['id'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
       userId: json['user_id'],
       address: json['address'],
       orderStatusID: json['orderStatus_id'],
@@ -62,8 +62,8 @@ class OrderModle {
   toJson() {
     return {
       "id": id,
-      "created_at": createdAt,
-      "updated_at": updatedAt,
+      "created_at": createdAt.toString(),
+      "updated_at": updatedAt.toString(),
       "user_id": userId,
       "address": address,
       "totle": totle,
@@ -75,14 +75,14 @@ class OrderModle {
 }
 
 class OrderDetails {
-   int id;
-   String createdAt;
-   String updatedAt;
-   int orderID;
-   int productID;
-   double uintPrice;
-   int quntity;
-   ProductModel product;
+  int id;
+  String createdAt;
+  String updatedAt;
+  int orderID;
+  int productID;
+  double uintPrice;
+  int quntity;
+  ProductModel product;
 
   OrderDetails({
     required this.id,
@@ -106,7 +106,7 @@ class OrderDetails {
       updatedAt: json['updated_at'],
       orderID: json['order_id'],
       productID: json['product_id'],
-      uintPrice: json['uint_price'],
+      uintPrice: double.parse(json['uint_price'].toString()),
       quntity: json['quntity'],
       product: ProductModel.fromJson(json['product']),
     );
